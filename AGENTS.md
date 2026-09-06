@@ -320,3 +320,16 @@ Tests and features must support Linux, macOS and Windows unless feature is expli
 
 Codex supports running connected app-server and exec-server on different operating systems. See the
 `$remote-tests` skill for details about integration testing these configurations.
+
+## Runtime-grounded PR review (Garnet Runtime Review)
+
+This repository records what each PR's CI actually executes (Garnet sensor,
+eBPF) and posts the record onto the PR as a `garnet-runtime-review[bot]`
+comment. When you review a PR here, ground your review in that record per
+`.codex/skills/code-review-runtime-evidence/SKILL.md`: fetch the comment, bind
+it to the PR head, apply the fail-closed verdict table, and emit the single
+`Runtime evidence (Garnet, head <sha7>): ` utterance. A missing or stale
+record is not a clean run. Evidence never approves a change; it narrows the
+question. The `Codex Review` workflow (`.github/workflows/codex-review.yml`)
+runs `codex review` with this skill automatically once `OPENAI_API_KEY` is set
+or the Codex GitHub App is installed.
